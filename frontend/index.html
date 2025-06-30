@@ -1,22 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Simple E-Commerce</title>
+  <title>🛒 E-Commerce Interest Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f8f9fa;
+    }
+    h1 {
+      color: #2d6a4f;
+    }
+    input, button, label {
+      margin: 10px 0;
+      padding: 8px;
+      width: 300px;
+    }
+    .products {
+      margin-top: 15px;
+    }
+    .products label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    button {
+      background-color: #40916c;
+      color: white;
+      border: none;
+      cursor: pointer;
+      width: 150px;
+    }
+  </style>
 </head>
 <body>
-  <h1>🛒 Welcome to My Store</h1>
-  <button onclick="sendInterest('product-123')">View Product 123</button>
+
+  <h1>🛍️ Submit Your Product Interest</h1>
+
+  <label for="user_id">User ID:</label><br>
+  <input type="text" id="user_id" placeholder="Enter your User ID"><br>
+
+  <label for="user_name">Name:</label><br>
+  <input type="text" id="user_name" placeholder="Enter your Name"><br>
+
+  <h3>Select a Product:</h3>
+  <div class="products">
+    <label><input type="radio" name="product" value="Laptop"> Laptop</label>
+    <label><input type="radio" name="product" value="Smartphone"> Smartphone</label>
+    <label><input type="radio" name="product" value="Smartwatch"> Smartwatch</label>
+    <label><input type="radio" name="product" value="4K TV"> 4K TV</label>
+    <label><input type="radio" name="product" value="Gaming Console"> Gaming Console</label>
+    <label><input type="radio" name="product" value="Microwave Oven"> Microwave Oven</label>
+    <label><input type="radio" name="product" value="Camera"> DSLR Camera</label>
+    <label><input type="radio" name="product" value="Fitness Band"> Fitness Band</label>
+  </div>
+
+  <br>
+  <button onclick="submitInterest()">Submit</button>
 
   <script>
-    function sendInterest(productId) {
+    function submitInterest() {
+      const userId = document.getElementById("user_id").value.trim();
+      const userName = document.getElementById("user_name").value.trim();
+      const selectedProduct = document.querySelector('input[name="product"]:checked');
+
+      if (!userId || !userName || !selectedProduct) {
+        alert("Please fill in all fields and select one product.");
+        return;
+      }
+
+      const product1 = selectedProduct.value;
+
       fetch('http://localhost:5000/interest', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: "user001", product_id: productId })
+        body: JSON.stringify({
+          user_id: userId,
+          user_name: userName,
+          product: product1
+        })
       })
       .then(res => res.json())
-      .then(data => alert("Interest recorded: " + JSON.stringify(data)));
+      .then(data => {
+        console.log("✅ Sent:", data);
+        alert("✅ Interest submitted successfully!");
+      })
+      .catch(err => {
+        console.error("❌ Error:", err);
+        alert("❌ Failed to submit.");
+      });
     }
   </script>
+
 </body>
 </html>

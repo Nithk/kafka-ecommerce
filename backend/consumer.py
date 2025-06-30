@@ -26,7 +26,7 @@ for message in consumer:
     data = message.value
     print("➡️ Received:", data)
     cursor.execute(
-        "INSERT INTO user_interest (user_id, product_id) VALUES (%s, %s)",
-        (data['user_id'], data['product_id'])
+        "INSERT INTO user_interest (user_id,user_name, product) VALUES (%s, %s,%s)",
+        (data['user_id'], data['user_name'],data['product'])
     )
     conn.commit()
