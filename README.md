@@ -22,9 +22,9 @@ This project is a real-time data pipeline that tracks user interest on an e-comm
 | Backend     | Python, Flask, Flask-CORS       |
 | Messaging   | Apache Kafka, Kafka Python Lib  |
 | Storage     | MySQL                           |
-| Orchestration (Optional) | Apache Airflow (future extension) |
+
 
 ---
 
-## 📁 Project Structure
+
 
