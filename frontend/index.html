@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple E-Commerce</title>
+</head>
+<body>
+  <h1>🛒 Welcome to My Store</h1>
+  <button onclick="sendInterest('product-123')">View Product 123</button>
+
+  <script>
+    function sendInterest(productId) {
+      fetch('http://localhost:5000/interest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: "user001", product_id: productId })
+      })
+      .then(res => res.json())
+      .then(data => alert("Interest recorded: " + JSON.stringify(data)));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS ecommerce;
+USE ecommerce;
+
+CREATE TABLE IF NOT EXISTS user_interest (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(50),
+    product_id VARCHAR(50),
+    viewed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
